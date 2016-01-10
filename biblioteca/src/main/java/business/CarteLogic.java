@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.AjaxBehaviorEvent;
 
-import model.Autor;
 import model.Carte;
 
 import org.springframework.stereotype.Service;
@@ -20,10 +20,23 @@ import repository.ICarteRepository;
 public class CarteLogic implements ICarteLogic {
 
 	private ICarteRepository carteRepository;
+	private boolean ordered = false;
 	
 	public void setCarteRepository(ICarteRepository carteRepository) {
         this.carteRepository = carteRepository;
     }
+	
+	public boolean isOrdered() {
+		return ordered;
+	}
+	
+	public void setOrdered(boolean ordered) {
+		this.ordered = ordered;
+	}
+	
+	public void updateCheck(AjaxBehaviorEvent event) {
+		setOrdered(!ordered);
+	}  
 	
     @Transactional
 	public List<Carte> getAll() {
@@ -34,7 +47,6 @@ public class CarteLogic implements ICarteLogic {
 	public List<Carte> getOredered() {
     	
     	List<Carte> carti = carteRepository.getAll();
-    	
     	Comparator<Carte> comp = new Comparator<Carte>() {
 			
 			@Override
@@ -45,7 +57,6 @@ public class CarteLogic implements ICarteLogic {
 		};
 		
 		carti.sort(comp);
-		
     	return carti;
     }
 
@@ -58,10 +69,6 @@ public class CarteLogic implements ICarteLogic {
 	@Transactional
 	public void deleteCarte(Carte carte) {
 		carteRepository.deleteCarte(carte);
-	}
-	
-	public void addAutorToCarte(Carte carte, Autor autor) {
-		carte.getAutori().add(autor);
 	}
 
 }
