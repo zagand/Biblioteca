@@ -25,10 +25,10 @@ public class CarteLogic implements ICarteLogic {
 	
     @Transactional
 	public List<Carte> getAll() {
-    	List<Carte> carti = carteRepository.getAll();
 		return carteRepository.getAll();
 	}
 
+    @Transactional
 	public void addCarte(Carte carte) {
 		carteRepository.addCarte(carte);
 		
