@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.annotation.PostConstruct;
 
 import model.Carte;
 
@@ -33,7 +34,8 @@ public class CarteLogic implements ICarteLogic {
 		carteRepository.addCarte(carte);
 		
 	}
-
+	
+	@Transactional
 	public void deleteCarte(Carte carte) {
 		carteRepository.deleteCarte(carte);
 	}
