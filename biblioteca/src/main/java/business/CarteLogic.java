@@ -1,10 +1,10 @@
 package business;
 
+import java.util.Comparator;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.annotation.PostConstruct;
 
 import model.Carte;
 
@@ -28,6 +28,25 @@ public class CarteLogic implements ICarteLogic {
 	public List<Carte> getAll() {
 		return carteRepository.getAll();
 	}
+    
+    @Transactional
+	public List<Carte> getOredered() {
+    	
+    	List<Carte> carti = carteRepository.getAll();
+    	
+    	Comparator<Carte> comp = new Comparator<Carte>() {
+			
+			@Override
+			public int compare(Carte arg0, Carte arg1) {
+				
+				return Integer.compare(arg0.getAn_aparitie(), arg1.getAn_aparitie());
+			}
+		};
+		
+		carti.sort(comp);
+		
+    	return carti;
+    }
 
     @Transactional
 	public void addCarte(Carte carte) {
