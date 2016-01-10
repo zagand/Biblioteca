@@ -5,11 +5,14 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "carte")
@@ -17,8 +20,9 @@ import javax.persistence.Table;
 public class Carte {
 
 	@Id
+	@GeneratedValue( strategy= GenerationType.AUTO )
 	@Column(name = "id")
-	private int id;
+	private int carte_id;
 	
 	@Column(name = "cota")
 	private String cota;
@@ -42,8 +46,8 @@ public class Carte {
 	private int an_aparitie;
 	
 	@ManyToMany
-	@JoinTable(name = "carte_autor", joinColumns = {@JoinColumn(name = "autor_id")},
-			inverseJoinColumns = {@JoinColumn(name = "carte_id")})
+	@JoinTable(name = "carte_autor", joinColumns = {@JoinColumn(name = "carte_id")},
+			inverseJoinColumns = {@JoinColumn(name = "autor_id")})
 	private List<Autor> autori;
 
 	public List<Autor> getAutori() {
@@ -55,11 +59,11 @@ public class Carte {
 	}
 
 	public int getId() {
-		return id;
+		return carte_id;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.carte_id = id;
 	}
 	
 	public String getCota() {

@@ -5,6 +5,8 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -15,8 +17,9 @@ import javax.persistence.Table;
 public class Autor {
 
 	@Id
+	@GeneratedValue( strategy= GenerationType.AUTO )
 	@Column(name = "id")
-	private int id;
+	private int autor_id;
 	
 	@Column(name = "nume")
 	private String nume;
@@ -33,11 +36,11 @@ public class Autor {
 	}
 
 	public int getId() {
-		return id;
+		return autor_id;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.autor_id = id;
 	}
 
 	public String getNume() {
