@@ -6,6 +6,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import model.Autor;
 import model.Carte;
 
 import org.springframework.stereotype.Service;
@@ -57,6 +58,10 @@ public class CarteLogic implements ICarteLogic {
 	@Transactional
 	public void deleteCarte(Carte carte) {
 		carteRepository.deleteCarte(carte);
+	}
+	
+	public void addAutorToCarte(Carte carte, Autor autor) {
+		carte.getAutori().add(autor);
 	}
 
 }
