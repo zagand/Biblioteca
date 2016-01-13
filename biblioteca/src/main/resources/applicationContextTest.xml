@@ -47,28 +47,12 @@
         <beans:property name="sessionFactory"
             ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>
-    <beans:bean id="carteLogic"
-        class="business.CarteLogic">
+    <beans:bean id="carteRepositoryTest"
+        class="repository.CarteRepositoryTest">
         <beans:property name="carteRepository" ref="carteRepository"></beans:property>
     </beans:bean>
-    
-    <beans:bean id="autorRepository"
-        class="repository.AutorRepository">
-        <beans:property name="sessionFactory"
-            ref="hibernate4AnnotatedSessionFactory" />
-    </beans:bean>
-    <beans:bean id="autorLogic"
-        class="business.AutorLogic">
-        <beans:property name="autorRepository" ref="autorRepository"></beans:property>
-    </beans:bean>
-    
-    <beans:bean id="carteHelper"
-        class="repository.CarteHelper">
-        <beans:property name="sessionFactory"
-            ref="hibernate4AnnotatedSessionFactory" />
-    </beans:bean>
      
-    <context:component-scan base-package="business" />
+    <context:component-scan base-package="repository" />
  
     <tx:annotation-driven transaction-manager="transactionManager" />
  

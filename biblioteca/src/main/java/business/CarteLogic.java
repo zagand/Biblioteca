@@ -1,5 +1,6 @@
 package business;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.AjaxBehaviorEvent;
 
+import model.Autor;
 import model.Carte;
 
 import org.springframework.stereotype.Service;
@@ -20,6 +22,7 @@ import repository.ICarteRepository;
 public class CarteLogic implements ICarteLogic {
 
 	private ICarteRepository carteRepository;
+	private List<String> autori;
 	private boolean ordered = false;
 	
 	public void setCarteRepository(ICarteRepository carteRepository) {
@@ -62,13 +65,41 @@ public class CarteLogic implements ICarteLogic {
 
     @Transactional
 	public void addCarte(Carte carte) {
+    	
+    	List<Autor> autori = new ArrayList<Autor>();
+    	for (String id : getAutori()) {
+			autori.add(carteRepository.findAutorById(Integer.parseInt(id)));
+		}
+    	carte.setAutori(autori);
 		carteRepository.addCarte(carte);
 		
 	}
+    
+    @Transactional
+    public Autor findAutorById(int id) {
+    	return carteRepository.findAutorById(id);
+    }
 	
 	@Transactional
 	public void deleteCarte(Carte carte) {
 		carteRepository.deleteCarte(carte);
 	}
 
+	public void addAutorToCarte(Carte carte, Autor autor) {
+		if(carte.getAutori() == null) {
+			List<Autor> autori = new ArrayList<Autor>();
+			autori.add(autor);
+			carte.setAutori(autori);
+		} else {
+			carte.getAutori().add(autor);
+		}
+	}
+	
+	public List<String> getAutori() {
+		return autori;
+	}
+
+	public void setAutori(List<String> autori) {
+		this.autori = autori;
+	}
 }

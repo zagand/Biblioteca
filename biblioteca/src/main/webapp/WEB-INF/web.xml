@@ -21,7 +21,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     </context-param>
     <!-- Welcome page -->
 	<welcome-file-list>
-		<welcome-file>home.xhtml</welcome-file>
+		<welcome-file>index.xhtml</welcome-file>
 	</welcome-file-list>
     
     <!-- JSF Mapping -->

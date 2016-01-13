@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
+import model.Autor;
 import model.Carte;
 
 @Repository
@@ -33,6 +34,11 @@ public class CarteRepository implements ICarteRepository {
 	public void deleteCarte(Carte carte) {
 		Session session = this.sessionFactory.getCurrentSession();
         session.delete(carte);
+	}
+	
+	public Autor findAutorById(int id) {
+		Session session = this.sessionFactory.getCurrentSession();
+		return (Autor) session.get(Autor.class, id);
 	}
 
 }

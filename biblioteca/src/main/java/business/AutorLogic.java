@@ -18,7 +18,7 @@ import repository.IAutorRepository;
 public class AutorLogic implements IAutorLogic{
 
 	private IAutorRepository autorRepository;
-	
+
 	public void setAutorRepository(IAutorRepository autorRepository) {
         this.autorRepository = autorRepository;
     }
@@ -32,5 +32,5 @@ public class AutorLogic implements IAutorLogic{
 	public void addAutor(Autor autor) {
 		autorRepository.addAutor(autor);
 	}
-
+    
 }

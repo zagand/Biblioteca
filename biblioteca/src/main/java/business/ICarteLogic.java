@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.faces.event.AjaxBehaviorEvent;
 
+import model.Autor;
 import model.Carte;
 
 public interface ICarteLogic {
@@ -15,4 +16,8 @@ public interface ICarteLogic {
 	public void addCarte(Carte carte);
 	public void deleteCarte(Carte carte);
 	public List<Carte> getOredered();
+	public void addAutorToCarte(Carte carte, Autor autor);
+	public Autor findAutorById(int id);
+	public List<String> getAutori();
+	public void setAutori(List<String> autori);
 }

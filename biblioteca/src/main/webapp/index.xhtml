@@ -6,7 +6,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:s="http://jboss.org/seam/faces">
+	xmlns:s="http://jboss.org/seam/faces"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
     <title>Biblioteca</title>
@@ -86,7 +87,7 @@
 								<ui:fragment rendered="#{carteLogic.ordered}">
 	    							<div class="table-responsive">
 		                            	<h:form rendered="#{!empty carteLogic.getOredered()}">
-									        <h:dataTable value="#{carteLogic.getOredered()}" var="carte" class="table table-striped">
+									        <h:dataTable value="#{carteLogic.getOredered()}" var="carte" class="table table-striped" paginator="true" rows="10">
 									        	<h:column><f:facet name="header">ID</f:facet>#{carte.id}</h:column>
 									            <h:column><f:facet name="header">Cota</f:facet>#{carte.cota}</h:column>
 									            <h:column><f:facet name="header">ISBN</f:facet>#{carte.isbn}</h:column>
@@ -95,14 +96,9 @@
 									            <h:column><f:facet name="header">An Aparitie</f:facet>#{carte.an_aparitie}</h:column>
 									            <h:column>
 									            	<f:facet name="header">Autori</f:facet>
-									            	<c:if test="#{!empty carte.autori}">
 							                    		<ui:repeat value="${carte.autori}" var="autor">
 							                    			#{autor.nume}
 							                    		</ui:repeat>
-							                    	</c:if>
-							                    	<c:if test="#{empty carte.autori}">
-							                    		nu exista autori
-							                    	</c:if>
 									            </h:column>
 									            <h:column>
 									            	<f:facet name="header">Stergere</f:facet>
@@ -118,7 +114,9 @@
 								<ui:fragment rendered="#{!carteLogic.ordered}">
 									<div class="table-responsive">
 		                            	<h:form rendered="#{!empty carteLogic.getAll()}">
-									        <h:dataTable value="#{carteLogic.getAll()}" var="carte" class="table table-striped">
+									        <h:dataTable value="#{carteLogic.getAll()}" var="carte" class="table table-striped" paginator="true" rows="10"
+									        			paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                 										rowsPerPageTemplate="5,10,15" selectionMode="single">
 									            <h:column><f:facet name="header">ID</f:facet>#{carte.id}</h:column>
 									            <h:column><f:facet name="header">Cota</f:facet>#{carte.cota}</h:column>
 									            <h:column><f:facet name="header">ISBN</f:facet>#{carte.isbn}</h:column>
@@ -127,14 +125,9 @@
 									            <h:column><f:facet name="header">An Aparitie</f:facet>#{carte.an_aparitie}</h:column>
 									            <h:column>
 									            	<f:facet name="header">Autori</f:facet>
-									            	<c:if test="#{!empty carte.autori}">
 							                    		<ui:repeat value="${carte.autori}" var="autor">
 							                    			#{autor.nume}
 							                    		</ui:repeat>
-							                    	</c:if>
-							                    	<c:if test="#{empty carte.autori}">
-							                    		nu exista autori
-							                    	</c:if>
 									            </h:column>
 									            <h:column>
 									            	<f:facet name="header">Stergere</f:facet>
